@@ -24,7 +24,7 @@ services:
     volumes_from:
       - app
 
-   mailcatcher:
+  mailcatcher:
     image: tophfr/mailcatcher
     expose:
       - "25"
