@@ -43,7 +43,7 @@ services:
   app:
     image: php:7.1-fpm
     volumes:
-      - .:/var/www/html
+      - ${PROJECT_ROOT}:/var/www/html
     command: "true"
 
   dbdata:
