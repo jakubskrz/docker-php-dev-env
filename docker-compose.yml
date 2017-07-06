@@ -17,6 +17,7 @@ services:
       - 9000
     links:
       - mailcatcher
+      - memcached
       - postgres
     volumes:
       - ./config/php-ini-overrides.ini:/usr/local/etc/php/conf.d/99-overrides.ini
@@ -29,6 +30,9 @@ services:
       - "1025:25"
       - "1080:80"
 
+  memcached:
+    image: memcached
+
   postgres:
     image: postgres:9.6
     volumes_from:
@@ -39,6 +43,15 @@ services:
       POSTGRES_DB: app_db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: SecretPass4DB
+
+  composer:
+    image: composer
+    volumes:
+      - ~/.ssh:/root/.ssh
+      - ~/.composer:/composer
+    volumes_from:
+      - app
+    working_dir: /var/www/html
 
   app:
     image: php:7.1-fpm
