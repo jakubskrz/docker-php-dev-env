@@ -22,6 +22,8 @@ services:
     volumes:
       - ./config/php-ini-overrides.ini:/usr/local/etc/php/conf.d/99-overrides.ini
       - ${PROJECT_ROOT}:/var/www/html
+    env_file:
+      - .env
 
   mailcatcher:
     image: tophfr/mailcatcher
