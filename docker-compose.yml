@@ -40,9 +40,9 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_DB: app_db
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: SecretPass4DB
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_DB}
+      POSTGRES_PASSWORD: ${POSTGRES_DB}
 
   composer:
     image: composer
