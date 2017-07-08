@@ -20,6 +20,7 @@ services:
       - mailcatcher
       - memcached
       - postgres
+      - mssql
     volumes:
       - ./config/php-ini-overrides.ini:/usr/local/etc/php/conf.d/99-overrides.ini
       - ${PROJECT_ROOT}:/var/www/html
@@ -47,6 +48,16 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
 
+  mssql:
+    image: microsoft/mssql-server-linux
+    volumes:
+      - mssqldata:/var/opt/mssql
+    ports:
+      - "1433:1433"
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: ${SA_PASSWORD}
+
   composer:
     image: composer
     volumes:
@@ -57,3 +68,4 @@ services:
 
 volumes:
   dbdata:
+  mssqldata:
