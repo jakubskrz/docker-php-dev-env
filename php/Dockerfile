@@ -1,4 +1,5 @@
 FROM php:7.1-fpm
+#FROM php:7.1-apache
 
 RUN apt-get update && apt-get install --no-install-recommends -yqq \
     libmcrypt-dev zlib1g-dev libpq-dev libicu-dev \
@@ -22,6 +23,10 @@ RUN git clone https://github.com/php-memcached-dev/php-memcached /usr/src/php/ex
     && cd /usr/src/php/ext/memcached && git checkout -b php7 origin/php7 \
     && docker-php-ext-configure memcached \
     && docker-php-ext-install memcached
+
+# Install Xdebug
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
 
 # Setup ssmtp for relaying mails to mailcatcher container
 RUN echo "mailhub=mailcatcher:25\nUseTLS=NO\nFromLineOverride=YES" > /etc/ssmtp/ssmtp.conf
