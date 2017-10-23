@@ -13,6 +13,7 @@ services:
 
   php:
     build: ./php/
+    image: jakubskrz/php-dev
     expose:
       - 9000
     links:
