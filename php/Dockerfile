@@ -23,6 +23,10 @@ RUN git clone https://github.com/php-memcached-dev/php-memcached /usr/src/php/ex
     && docker-php-ext-configure memcached \
     && docker-php-ext-install memcached
 
+# Install Xdebug
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
+
 # Setup ssmtp for relaying mails to mailcatcher container
 RUN echo "mailhub=mailcatcher:25\nUseTLS=NO\nFromLineOverride=YES" > /etc/ssmtp/ssmtp.conf
 
