@@ -2,6 +2,8 @@ include .env
 
 .PHONY: build up halt shell composer-install composer-update
 
+all: up
+
 build:
 	docker-compose --project-name $(PROJECT_NAME) build --no-cache
 
