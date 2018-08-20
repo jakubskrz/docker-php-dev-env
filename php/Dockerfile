@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -yqq \
 RUN apt-get update && apt-get install --no-install-recommends -yqq \
     locales zlib1g-dev libpq-dev libicu-dev libicu57 \
     libfreetype6-dev libjpeg62-turbo-dev libpng-dev \
-    git unzip wget libldap2-dev libmemcached-dev ssmtp libgss3
+    git libldap2-dev libmemcached-dev ssmtp libgss3
 
 # Add Microsoft repo for Microsoft ODBC Driver for Linux
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
@@ -52,7 +52,7 @@ RUN echo "mailhub=mailcatcher:25\nUseTLS=NO\nFromLineOverride=YES" > /etc/ssmtp/
 
 # Clean up
 RUN apt-get remove -y \
-    git unzip libicu-dev unixodbc-dev \
+    git libicu-dev unixodbc-dev \
     devscripts debhelper dh-exec dh-autoreconf
 
 RUN apt-get autoremove -y && \
