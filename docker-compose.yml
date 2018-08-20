@@ -13,7 +13,7 @@ services:
 
   php:
     build: ./php/
-    image: jakubskrz/php-dev
+    image: jakubskrz/php-dev:7.2
     expose:
       - 9000
     links:
@@ -65,6 +65,8 @@ services:
       - ~/.composer:/composer
       - ${PROJECT_ROOT}:/var/www/html
     working_dir: /var/www/html
+    env_file:
+      - .env
 
 volumes:
   dbdata:
