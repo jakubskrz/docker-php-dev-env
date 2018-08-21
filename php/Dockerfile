@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install --no-install-recommends -yqq \
 
 # Add Microsoft repo for Microsoft ODBC Driver for Linux
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
-    && curl https://packages.microsoft.com/config/debian/8/prod.list > /etc/apt/sources.list.d/mssql-release.list
+    && curl https://packages.microsoft.com/config/debian/9/prod.list > /etc/apt/sources.list.d/mssql-release.list
 
 # Install SQL Server drivers
 RUN apt-get update && ACCEPT_EULA=Y apt-get install -yqq unixodbc-dev msodbcsql17
@@ -44,8 +44,8 @@ RUN git clone https://github.com/php-memcached-dev/php-memcached /usr/src/php/ex
     && docker-php-ext-install memcached
 
 # Install Xdebug
- RUN pecl install xdebug \
-     && docker-php-ext-enable xdebug
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
 
 # Setup ssmtp for relaying mails to mailcatcher container
 RUN echo "mailhub=mailcatcher:25\nUseTLS=NO\nFromLineOverride=YES" > /etc/ssmtp/ssmtp.conf
